@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647532438}
   - component: {fileID: 647532437}
+  - component: {fileID: 647532439}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -301,6 +302,25 @@ Transform:
   - {fileID: 1634114125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647532439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647532436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3c3571a90e01c47a6006d0e01582e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 8
+  Height: 8
+  GroundTiles:
+  - {fileID: 11400000, guid: 6b88e7b142b39804cb9b486841805ac0, type: 2}
+  WallTiles:
+  - {fileID: 11400000, guid: 3230dec4d9680384ba633c6df8e70624, type: 2}
+  - {fileID: 11400000, guid: a0e0bbc3039b67c46ad9efb193fabda9, type: 2}
 --- !u!1 &1634114124
 GameObject:
   m_ObjectHideFlags: 0
