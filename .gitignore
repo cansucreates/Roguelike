@@ -1,0 +1,67 @@
+# ========== Unity Specific ==========
+# Ignore generated project files
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+*.obj
+*.bak
+*.swp
+*.log
+
+# Ignore Unity's cache and temp files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Ignore Unity metadata and cache
+*.unityproj
+*.asset
+*.asset.meta
+*.mat.meta
+*.prefab.meta
+*.controller.meta
+*.fbx.meta
+
+# Ignore Play mode test results
+Assets/Scenes/TestResults/
+
+# Ignore Lighting data (regenerates)
+Assets/**/Lightmap-*/**
+Assets/**/ReflectionProbe-*/**
+Assets/**/LightingData.asset
+Assets/**/LightingData.asset.meta
+
+# Ignore crashes and logs
+CrashReports/
+error.log
+output_log.txt
+Player.log
+
+# ========== VS Code Specific ==========
+.vscode/
+
+# ========== Package Management ==========
+# Ignore package caches and lock files
+Packages/*/package-lock.json
+Packages/*/package.json
+
+# Ignore Yarn, npm, and Node.js dependencies (if used)
+node_modules/
+yarn.lock
+npm-debug.log
+
+# Ignore .gitignore backup files
+.gitignore~
