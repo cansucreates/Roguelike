@@ -10,7 +10,7 @@ public class BoardManager : MonoBehaviour
         public bool Passable;
     }
 
-    private Tilemap m_Tilemap;
+    private Tilemap m_Tilemap; // used m cause it's private
 
     public int Width;
     public int Height;
@@ -56,5 +56,15 @@ public class BoardManager : MonoBehaviour
     public Vector3 CellToWorld(Vector2Int cellIndex)
     {
         return m_Grid.GetCellCenterWorld((Vector3Int)cellIndex);
+    }
+
+    // the method for getting the cell data
+    public CellData GetCellData(Vector2Int cellIndex)
+    {
+        if (cellIndex.x < 0 || cellIndex.x >= Width || cellIndex.y < 0 || cellIndex.y >= Height)
+        {
+            return null;
+        }
+        return m_BoardData[cellIndex.x, cellIndex.y];
     }
 }
