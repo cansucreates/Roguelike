@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     }
 
     // the method for moving the player
-    public void MoveTo(Vector2Int cell) {
+    public void MoveTo(Vector2Int cell)
+    {
         m_CellPosition = cell;
         transform.position = m_Board.CellToWorld(m_CellPosition);
     }

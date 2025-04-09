@@ -20,8 +20,7 @@ public class BoardManager : MonoBehaviour
     private Grid m_Grid; // Reference to the Grid component
     public PlayerController Player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Init() 
     {
         m_Tilemap = GetComponentInChildren<Tilemap>();
         m_BoardData = new CellData[Width, Height]; // Initialize the 2D array
@@ -49,7 +48,6 @@ public class BoardManager : MonoBehaviour
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
         }
-        Player.Spawn(this, new Vector2Int(1, 1)); // Spawn the player at (1, 1)
     }
 
     // transform cell index to world position
