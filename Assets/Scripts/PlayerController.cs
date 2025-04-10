@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.Instance.TurnManager.Tick(); // Call the TurnManager to tick the turn
                 MoveTo(newCellTarget); // Move the player to the new cell
+
+                if (cellData.ContainedObject != null)
+                {
+                    cellData.ContainedObject.PlayerEntered(); // Call the PlayerEntered method on the contained object
+                }
             }
         }
     }

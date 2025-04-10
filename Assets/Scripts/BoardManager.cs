@@ -9,7 +9,7 @@ public class BoardManager : MonoBehaviour
     public class CellData
     {
         public bool Passable;
-        public GameObject ContainedObject; // The health bject contained in the cell, if any
+        public CellObject ContainedObject; // The health bject contained in the cell, if any
     }
 
     private Tilemap m_Tilemap; // used m cause it's private
@@ -21,7 +21,7 @@ public class BoardManager : MonoBehaviour
     private CellData[,] m_BoardData; // 2D array to store cell data
     private Grid m_Grid; // Reference to the Grid component
     public PlayerController Player;
-    public GameObject[] FoodPrefab; // Prefab for the food object
+    public FoodObject[] FoodPrefab; // Prefab for the food object
     private List<Vector2Int> m_EmptyCellsList;
     public int minFood; // Minimum number of food items to generate
     public int maxFood; // Maximum number of food items to generate
@@ -90,8 +90,8 @@ public class BoardManager : MonoBehaviour
             m_EmptyCellsList.RemoveAt(randomIndex); // Remove the cell from the empty cells list to avoid duplicates
             CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
 
-            GameObject randomFood = FoodPrefab[Random.Range(0, FoodPrefab.Length)]; // Randomly select a food prefab
-            GameObject newFood = Instantiate(randomFood); // Instantiate the food prefab
+            FoodObject randomFood = FoodPrefab[Random.Range(0, FoodPrefab.Length)]; // Randomly select a food prefab
+            FoodObject newFood = Instantiate(randomFood); // Instantiate the food prefab
             newFood.transform.position = CellToWorld(coord); // Set the position of the food object
             data.ContainedObject = newFood; // Store the food object in the cell data
         }
