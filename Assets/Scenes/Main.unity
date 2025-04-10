@@ -474,10 +474,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0e0bbc3039b67c46ad9efb193fabda9, type: 2}
   Player: {fileID: 227577097}
   FoodPrefab:
-  - {fileID: 382020705265720882, guid: b54d65729eb7b2249ad6bfe4af995817, type: 3}
-  - {fileID: 2690817016701116619, guid: d52e6369ff270744f8c5a37818ca3e39, type: 3}
-  - {fileID: 6497865311247328861, guid: 9ed8c3fa963097f4ea3a86d45753609c, type: 3}
-  - {fileID: 3810933868722419328, guid: 82e4cea081a91964fbae0bcfa70181f3, type: 3}
+  - {fileID: 4397357037109233128, guid: d52e6369ff270744f8c5a37818ca3e39, type: 3}
+  - {fileID: 1011530009218026889, guid: 9ed8c3fa963097f4ea3a86d45753609c, type: 3}
+  - {fileID: 626398863068735312, guid: 82e4cea081a91964fbae0bcfa70181f3, type: 3}
+  - {fileID: -6890325197720004754, guid: b54d65729eb7b2249ad6bfe4af995817, type: 3}
   minFood: 2
   maxFood: 6
 --- !u!1 &1634114124
