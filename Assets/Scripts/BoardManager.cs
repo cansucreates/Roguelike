@@ -21,8 +21,10 @@ public class BoardManager : MonoBehaviour
     private CellData[,] m_BoardData; // 2D array to store cell data
     private Grid m_Grid; // Reference to the Grid component
     public PlayerController Player;
-    public GameObject FoodPrefab; // Prefab for the food object
+    public GameObject[] FoodPrefab; // Prefab for the food object
     private List<Vector2Int> m_EmptyCellsList;
+    public int minFood; // Minimum number of food items to generate
+    public int maxFood; // Maximum number of food items to generate
 
     public void Init()
     {
@@ -77,7 +79,9 @@ public class BoardManager : MonoBehaviour
 
     void GenerateFood()
     {
-        int foodCount = 5; // Number of food items to generate
+        int randomFoodCount = Random.Range(minFood, maxFood + 1); // Get a random number of food items to generate
+        int foodCount = Mathf.Min(randomFoodCount, m_EmptyCellsList.Count); // Ensure we don't exceed the number of empty cells
+
         for (int i = 0; i < foodCount; i++)
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count); // Get a random index from the empty cells list
@@ -86,7 +90,8 @@ public class BoardManager : MonoBehaviour
             m_EmptyCellsList.RemoveAt(randomIndex); // Remove the cell from the empty cells list to avoid duplicates
             CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
 
-            GameObject newFood = Instantiate(FoodPrefab); // Instantiate the food prefab
+            GameObject randomFood = FoodPrefab[Random.Range(0, FoodPrefab.Length)]; // Randomly select a food prefab
+            GameObject newFood = Instantiate(randomFood); // Instantiate the food prefab
             newFood.transform.position = CellToWorld(coord); // Set the position of the food object
             data.ContainedObject = newFood; // Store the food object in the cell data
         }
