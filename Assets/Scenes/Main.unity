@@ -473,6 +473,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3230dec4d9680384ba633c6df8e70624, type: 2}
   - {fileID: 11400000, guid: a0e0bbc3039b67c46ad9efb193fabda9, type: 2}
   Player: {fileID: 227577097}
+  FoodPrefab: {fileID: 382020705265720882, guid: b54d65729eb7b2249ad6bfe4af995817, type: 3}
 --- !u!1 &1634114124
 GameObject:
   m_ObjectHideFlags: 0
