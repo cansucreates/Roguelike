@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour
     private List<Vector2Int> m_EmptyCellsList;
     public int minFood; // Minimum number of food items to generate
     public int maxFood; // Maximum number of food items to generate
+    public WallObject WallPrefab; // Prefab for the wall object
 
     public void Init()
     {
@@ -58,6 +59,7 @@ public class BoardManager : MonoBehaviour
         }
 
         m_EmptyCellsList.Remove(new Vector2Int(1, 1)); // Remove the starting position from the empty cells list cause player will spawn there
+        GenerateWall(); // Generate walls on the board
         GenerateFood(); // Generate food items on the board
     }
 
@@ -95,5 +97,28 @@ public class BoardManager : MonoBehaviour
             newFood.transform.position = CellToWorld(coord); // Set the position of the food object
             data.ContainedObject = newFood; // Store the food object in the cell data
         }
+    }
+
+    void GenerateWall()
+    {
+        int wallCount = Random.Range(6, 10); // Get a random number of walls to generate
+        for (int i = 0; i < wallCount; i++)
+        {
+            int RandomIndex = Random.Range(0, m_EmptyCellsList.Count); // Get a random index from the empty cells list
+            Vector2Int coord = m_EmptyCellsList[RandomIndex]; // Get a random cell from the empty cells list
+
+            m_EmptyCellsList.RemoveAt(RandomIndex); // Remove the cell from the empty cells list to avoid duplicates
+            CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
+
+            WallObject newWall = Instantiate(WallPrefab); // Instantiate the wall prefab
+            newWall.Init(coord); // Initialize the wall object with the cell coordinates
+            newWall.transform.position = CellToWorld(coord); // Set the position of the wall object
+            data.ContainedObject = newWall; // Store the wall object in the cell data
+        }
+    }
+
+    public void SetCellTile(Vector2Int cellIndex, Tile tile)
+    {
+        m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile); // Set the tile at the specified cell index
     }
 }
