@@ -44,4 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd74b9a679e83b40b7d8ae38f8e4a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObstacleTile: {fileID: 11400000, guid: 231fcf0304fa83448ab2e522652f3e2c, type: 2}
+  ObstacleTile:
+  - {fileID: 11400000, guid: bbbcb753a9b28f74a938397788846cfe, type: 2}
+  - {fileID: 11400000, guid: 231fcf0304fa83448ab2e522652f3e2c, type: 2}
+  - {fileID: 11400000, guid: 4730b416078269d4a8c9959f2fa697a9, type: 2}
+  DamagedObstacleTiles:
+  - {fileID: 11400000, guid: 6c07a31a23063fd4c90d5c8dfbb70fe3, type: 2}
+  - {fileID: 11400000, guid: 3e25e7555c17a3f46a7435ae0d03f590, type: 2}
+  - {fileID: 11400000, guid: 148e3565725c608449cc3b0e8395c62d, type: 2}
+  MaxHealth: 3
