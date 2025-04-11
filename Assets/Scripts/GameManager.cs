@@ -33,13 +33,15 @@ public class GameManager : MonoBehaviour
         PlayerController.Spawn(BoardManager, new Vector2Int(1, 1)); // Spawn the player at (1, 1)
     }
 
-    public void OnTurnHappen()
+    public void OnTurnHappen() // method to handle the turn event
     {
-        m_CurrentFood -= 1; // decrease food count by 1 for each turn
+        ChangeFood(-1); // Decrease food count by 1 each turn
+    }
+
+    // Method to add food to the current food count
+    public void ChangeFood(int food)
+    {
+        m_CurrentFood += food; // Increase the food count
         m_FoodLabel.text = "Food: " + m_CurrentFood; // Update the food count in the UI
-        if (m_CurrentFood <= 0)
-        {
-            Debug.Log("Game Over!"); // Game over if food count is 0
-        }
     }
 }
