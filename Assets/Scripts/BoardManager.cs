@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -90,12 +91,10 @@ public class BoardManager : MonoBehaviour
             Vector2Int coord = m_EmptyCellsList[randomIndex]; // Get a random cell from the empty cells list
 
             m_EmptyCellsList.RemoveAt(randomIndex); // Remove the cell from the empty cells list to avoid duplicates
-            CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
 
             FoodObject randomFood = FoodPrefab[Random.Range(0, FoodPrefab.Length)]; // Randomly select a food prefab
             FoodObject newFood = Instantiate(randomFood); // Instantiate the food prefab
-            newFood.transform.position = CellToWorld(coord); // Set the position of the food object
-            data.ContainedObject = newFood; // Store the food object in the cell data
+            AddObject(newFood, coord); // Add the food object to the cell
         }
     }
 
@@ -107,18 +106,22 @@ public class BoardManager : MonoBehaviour
             int RandomIndex = Random.Range(0, m_EmptyCellsList.Count); // Get a random index from the empty cells list
             Vector2Int coord = m_EmptyCellsList[RandomIndex]; // Get a random cell from the empty cells list
 
-            m_EmptyCellsList.RemoveAt(RandomIndex); // Remove the cell from the empty cells list to avoid duplicates
-            CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
+            m_EmptyCellsList.RemoveAt(RandomIndex); // Remove the cell from the empty cells list to avoid duplicates         
 
             WallObject newWall = Instantiate(WallPrefab); // Instantiate the wall prefab
-            newWall.Init(coord); // Initialize the wall object with the cell coordinates
-            newWall.transform.position = CellToWorld(coord); // Set the position of the wall object
-            data.ContainedObject = newWall; // Store the wall object in the cell data
+            AddObject(newWall, coord); // Add the wall object to the cell
         }
     }
 
     public void SetCellTile(Vector2Int cellIndex, Tile tile)
     {
         m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile); // Set the tile at the specified cell index
+    }
+
+    void AddObject(CellObject obj, Vector2Int coord) {
+        CellData data = m_BoardData[coord.x, coord.y]; // Get the cell data
+        obj.transform.position = CellToWorld(coord); // Set the position of the object
+        data.ContainedObject = obj; // Store the object in the cell data
+        obj.Init(coord); // Initialize the object with the cell coordinates
     }
 }
