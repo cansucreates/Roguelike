@@ -481,6 +481,7 @@ MonoBehaviour:
   minFood: 2
   maxFood: 6
   WallPrefab: {fileID: 5395071922350934686, guid: dd581f6b8c36dd8408747f755a28bacd, type: 3}
+  ExitCellPrefab: {fileID: 6238140884739376149, guid: ac3c777bad64dc344bf26b0d2f063db1, type: 3}
 --- !u!1 &1634114124
 GameObject:
   m_ObjectHideFlags: 0
