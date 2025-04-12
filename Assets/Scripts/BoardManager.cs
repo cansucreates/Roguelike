@@ -27,6 +27,7 @@ public class BoardManager : MonoBehaviour
     public int minFood; // Minimum number of food items to generate
     public int maxFood; // Maximum number of food items to generate
     public WallObject WallPrefab; // Prefab for the wall object
+    public ExitCellObject ExitCellPrefab; // Prefab for the exit object
 
     public void Init()
     {
@@ -60,6 +61,11 @@ public class BoardManager : MonoBehaviour
         }
 
         m_EmptyCellsList.Remove(new Vector2Int(1, 1)); // Remove the starting position from the empty cells list cause player will spawn there
+
+        Vector2Int endCoord = new Vector2Int(Width - 2, Height - 2); // Set the exit cell coordinates
+        AddObject(Instantiate(ExitCellPrefab), endCoord); // Instantiate and add the exit cell object
+        m_EmptyCellsList.Remove(endCoord); // Remove the exit cell from the empty cells list
+
         GenerateWall(); // Generate walls on the board
         GenerateFood(); // Generate food items on the board
     }
@@ -129,5 +135,28 @@ public class BoardManager : MonoBehaviour
     public Tile GetCellTile(Vector2Int cellIndex)
     {
         return m_Tilemap.GetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0)) as Tile; // Get the tile at the specified cell index
+    }
+
+    public void Clean() // Clean the board
+    {
+        // no board data, so exit early, nothing to clean
+        if (m_BoardData == null)
+            return;
+
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                var cellData = m_BoardData[x, y];
+                if (cellData.ContainedObject != null)
+                {
+                    Destroy(cellData.ContainedObject.gameObject); // Destroy the contained object
+                    // destroy the gameobject not just cellData.ContainedObject otherwise
+                    // what you are destyroying is just the CellObject component and not the whole
+                    // gameobject with the sprite
+                }
+                SetCellTile(new Vector2Int(x, y), null); // Reset the tile to null
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private BoardManager m_Board; // Reference to the BoardManager
     private Vector2Int m_CellPosition; // The cell position of the player
+    private bool m_IsGameOver; // Flag to check if the game is over
 
     public void Spawn(BoardManager boardManager, Vector2Int cell)
     {
@@ -19,10 +20,25 @@ public class PlayerController : MonoBehaviour
         transform.position = m_Board.CellToWorld(m_CellPosition);
     }
 
+    public void Init()
+    {
+        m_IsGameOver = false; // Initialize the game over flag to false
+    }
+
     private void Update()
     {
         Vector2Int newCellTarget = m_CellPosition;
         bool hasMoved = false;
+
+        if (m_IsGameOver)
+        {
+            if (Keyboard.current.enterKey.wasPressedThisFrame)
+            {
+                GameManager.Instance.StartNewGame();
+            }
+
+            return;
+        }
 
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
@@ -64,5 +80,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GameOver()
+    {
+        m_IsGameOver = true;
     }
 }
