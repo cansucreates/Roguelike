@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     private bool m_IsMoving; // Flag to check if the player is moving
     private Vector3 m_MoveTarget; // The target position for the player to move to
     public float MoveSpeed = 5f; // Speed of the player movement
+    private Animator m_Animator; // Reference to the Animator component
+
+    void Awake()
+    {
+        m_Animator = GetComponent<Animator>(); // Get the Animator component attached to the player
+    }
 
     public void Spawn(BoardManager boardManager, Vector2Int cell)
     {
@@ -25,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
         m_IsMoving = true; // Set the moving flag to true
         m_MoveTarget = m_Board.CellToWorld(m_CellPosition); // Get the target position in world space
+
+        m_Animator.SetBool("Moving", m_IsMoving); // Set the animator parameter to trigger the moving animation
     }
 
     public void Init()
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
             if (transform.position == m_MoveTarget)
             {
                 m_IsMoving = false; // Stop moving when the target position is reached
+                m_Animator.SetBool("Moving", false); // Set the animator parameter to stop the moving animation
                 var CellData = m_Board.GetCellData(m_CellPosition);
                 if (CellData.ContainedObject != null)
                 {

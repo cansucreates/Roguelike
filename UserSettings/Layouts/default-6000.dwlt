@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -948,9 +948,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 2.7700534, y: 3.648864, z: 0.025207536}
+    m_Target: {x: 2.1338942, y: 3.4175706, z: 0.037788346}
     speed: 2
-    m_Value: {x: 2.7700534, y: 3.648864, z: 0.025207536}
+    m_Value: {x: 2.1338942, y: 3.4175706, z: 0.037788346}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1000,9 +1000,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.4792476
+    m_Target: 6.2211604
     speed: 2
-    m_Value: 7.4792476
+    m_Value: 6.2211604
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1198,8 +1198,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 72}
-    m_SelectedIDs: 80b10000
-    m_LastClickedID: 45440
+    m_SelectedIDs: 8eb10000
+    m_LastClickedID: 45454
     m_ExpandedIDs: 00000000ccaf0000ceaf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
