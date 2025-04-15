@@ -23,7 +23,7 @@ public class WallObject : CellObject
         GameManager.Instance.BoardManager.SetCellTile(cell, tile); // Set the tile for the wall object in the board manager
     }
 
-    public override bool PlayerWantsToEnter()
+    public override bool PlayerWantsToEnter(PlayerController player)
     {
         m_HealthPoint -= 1;
 
@@ -31,11 +31,13 @@ public class WallObject : CellObject
         {
             Tile damagedTile = DamagedObstacleTiles[m_SelectedTileIndex]; // Get the damaged tile
             GameManager.Instance.BoardManager.SetCellTile(m_Cell, damagedTile); // Set the tile for the wall object in the board manager
+            player.PlayAttackAnimation(); // Play the attack animation for the player
             return false; // Return false to prevent the player from entering the wall object
         }
 
         if (m_HealthPoint > 0)
         {
+            player.PlayAttackAnimation(); // Play the attack animation for the player
             return false; // Return false to prevent the player from entering the wall object
         }
 

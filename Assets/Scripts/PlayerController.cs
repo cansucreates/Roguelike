@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 {
                     MoveTo(newCellTarget); // Move the player to the new cell
                 }
-                else if (cellData.ContainedObject.PlayerWantsToEnter())
+                else if (cellData.ContainedObject.PlayerWantsToEnter(this))
                 {
                     MoveTo(newCellTarget); // Move the player to the new cell
                 }
@@ -121,5 +121,10 @@ public class PlayerController : MonoBehaviour
     public void GameOver()
     {
         m_IsGameOver = true;
+    }
+
+    public void PlayAttackAnimation()
+    {
+        m_Animator.SetTrigger("Attack"); // Trigger the attack animation
     }
 }
