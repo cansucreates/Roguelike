@@ -6,22 +6,38 @@ public class PlayerController : MonoBehaviour
     private BoardManager m_Board; // Reference to the BoardManager
     private Vector2Int m_CellPosition; // The cell position of the player
     private bool m_IsGameOver; // Flag to check if the game is over
+    private bool m_IsMoving; // Flag to check if the player is moving
+    private Vector3 m_MoveTarget; // The target position for the player to move to
+    public float MoveSpeed = 5f; // Speed of the player movement
+    private Animator m_Animator; // Reference to the Animator component
+
+    void Awake()
+    {
+        m_Animator = GetComponent<Animator>(); // Get the Animator component attached to the player
+    }
 
     public void Spawn(BoardManager boardManager, Vector2Int cell)
     {
         m_Board = boardManager;
-        MoveTo(cell); // Move the player to the specified cell
+        m_CellPosition = cell; // Set the initial cell position of the player
+        transform.position = m_Board.CellToWorld(cell); // Set the initial position of the player in world space
+        m_IsMoving = false; // Initialize the moving flag to false
     }
 
     // the method for moving the player
     public void MoveTo(Vector2Int cell)
     {
         m_CellPosition = cell;
-        transform.position = m_Board.CellToWorld(m_CellPosition);
+
+        m_IsMoving = true; // Set the moving flag to true
+        m_MoveTarget = m_Board.CellToWorld(m_CellPosition); // Get the target position in world space
+
+        m_Animator.SetBool("Moving", m_IsMoving); // Set the animator parameter to trigger the moving animation
     }
 
     public void Init()
     {
+        m_IsMoving = false; // Initialize the moving flag to false
         m_IsGameOver = false; // Initialize the game over flag to false
     }
 
@@ -38,6 +54,27 @@ public class PlayerController : MonoBehaviour
             }
 
             return;
+        }
+
+        if (m_IsMoving)
+        {
+            // Move the player towards the target position
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                m_MoveTarget,
+                MoveSpeed * Time.deltaTime
+            );
+
+            if (transform.position == m_MoveTarget)
+            {
+                m_IsMoving = false; // Stop moving when the target position is reached
+                m_Animator.SetBool("Moving", false); // Set the animator parameter to stop the moving animation
+                var CellData = m_Board.GetCellData(m_CellPosition);
+                if (CellData.ContainedObject != null)
+                {
+                    CellData.ContainedObject.PlayerEntered(); // Call the PlayerEntered method on the contained object
+                }
+            }
         }
 
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
@@ -73,10 +110,9 @@ public class PlayerController : MonoBehaviour
                 {
                     MoveTo(newCellTarget); // Move the player to the new cell
                 }
-                else if (cellData.ContainedObject.PlayerWantsToEnter())
+                else if (cellData.ContainedObject.PlayerWantsToEnter(this))
                 {
                     MoveTo(newCellTarget); // Move the player to the new cell
-                    cellData.ContainedObject.PlayerEntered(); // Call the PlayerEntered method on the contained object
                 }
             }
         }
@@ -85,5 +121,10 @@ public class PlayerController : MonoBehaviour
     public void GameOver()
     {
         m_IsGameOver = true;
+    }
+
+    public void PlayAttackAnimation()
+    {
+        m_Animator.SetTrigger("Attack"); // Trigger the attack animation
     }
 }

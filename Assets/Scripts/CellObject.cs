@@ -11,7 +11,7 @@ public class CellObject : MonoBehaviour
 
     public virtual void PlayerEntered() { }
 
-    public virtual bool PlayerWantsToEnter()
+    public virtual bool PlayerWantsToEnter(PlayerController player)
     {
         return true; // Return true to allow the player to enter the cell
     }
