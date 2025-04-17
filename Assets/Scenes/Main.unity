@@ -506,6 +506,8 @@ MonoBehaviour:
   maxFood: 6
   WallPrefab: {fileID: 5395071922350934686, guid: dd581f6b8c36dd8408747f755a28bacd, type: 3}
   ExitCellPrefab: {fileID: 6238140884739376149, guid: ac3c777bad64dc344bf26b0d2f063db1, type: 3}
+  EnemyPrefab: {fileID: 137540800597403294, guid: 120cdb836acce4243a4a54df93125b06, type: 3}
+  enemyCount: 4
 --- !u!1 &1634114124
 GameObject:
   m_ObjectHideFlags: 0
