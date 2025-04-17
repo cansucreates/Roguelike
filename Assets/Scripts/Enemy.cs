@@ -5,10 +5,12 @@ public class Enemy : CellObject
     public int Health = 3;
 
     private int m_CurrentHealth;
+    private Animator m_Animator;
 
     private void Awake()
     {
         GameManager.Instance.TurnManager.onTick += TurnHappened;
+        m_Animator = GetComponent<Animator>();
     }
 
     private void OnDestroy()
@@ -69,8 +71,12 @@ public class Enemy : CellObject
 
         if ((xDist == 0 && absYDist == 1) || (yDist == 0 && absXDist == 1))
         {
+            PlayAttackAnimation();
             //we are adjacent to the player, attack!
-            GameManager.Instance.ChangeFood(3);
+            GameManager.Instance.PlayerController.PlayerHit();
+            //we hit the player, so we can remove 1 food from the player
+            GameManager.Instance.ChangeFood(-1);
+
         }
         else
         {
@@ -119,5 +125,10 @@ public class Enemy : CellObject
 
         //player below
         return MoveTo(m_Cell + Vector2Int.down);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        m_Animator.SetTrigger("Attack"); // Trigger the attack animation
     }
 }

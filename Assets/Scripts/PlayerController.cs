@@ -129,5 +129,10 @@ public class PlayerController : MonoBehaviour
         m_Animator.SetTrigger("Attack"); // Trigger the attack animation
     }
 
+    public void PlayerHit()
+    {
+        m_Animator.SetTrigger("Hit"); // Trigger the hit animation
+    }
+
     public Vector2Int Cell => m_CellPosition;
 }
