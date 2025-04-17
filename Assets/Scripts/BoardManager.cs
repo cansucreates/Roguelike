@@ -28,6 +28,8 @@ public class BoardManager : MonoBehaviour
     public int maxFood; // Maximum number of food items to generate
     public WallObject WallPrefab; // Prefab for the wall object
     public ExitCellObject ExitCellPrefab; // Prefab for the exit object
+    public Enemy EnemyPrefab; // Prefab for the enemy object
+    public int enemyCount; // Number of enemies to generate
 
     public void Init()
     {
@@ -68,6 +70,7 @@ public class BoardManager : MonoBehaviour
 
         GenerateWall(); // Generate walls on the board
         GenerateFood(); // Generate food items on the board
+        GenerateEnemy(); // Generate enemies on the board
     }
 
     // transform cell index to world position
@@ -101,6 +104,18 @@ public class BoardManager : MonoBehaviour
             FoodObject randomFood = FoodPrefab[Random.Range(0, FoodPrefab.Length)]; // Randomly select a food prefab
             FoodObject newFood = Instantiate(randomFood); // Instantiate the food prefab
             AddObject(newFood, coord); // Add the food object to the cell
+        }
+    }
+
+    void GenerateEnemy(){
+        for (int i = 0; i < enemyCount; i++) {
+            int randomIndex = Random.Range(0, m_EmptyCellsList.Count); // Get a random index from the empty cells list
+            Vector2Int coord = m_EmptyCellsList[randomIndex]; // Get a random cell from the empty cells list
+
+            m_EmptyCellsList.RemoveAt(randomIndex); // Remove the cell from the empty cells list to avoid duplicates
+
+            Enemy enemy = Instantiate(EnemyPrefab); // Instantiate the enemy prefab
+            AddObject(enemy, coord); // Add the enemy object to the cell
         }
     }
 
