@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -127,4 +128,6 @@ public class PlayerController : MonoBehaviour
     {
         m_Animator.SetTrigger("Attack"); // Trigger the attack animation
     }
+
+    public Vector2Int Cell => m_CellPosition;
 }

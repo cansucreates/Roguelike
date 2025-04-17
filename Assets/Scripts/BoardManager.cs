@@ -107,8 +107,10 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void GenerateEnemy(){
-        for (int i = 0; i < enemyCount; i++) {
+    void GenerateEnemy()
+    {
+        for (int i = 0; i < enemyCount; i++)
+        {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count); // Get a random index from the empty cells list
             Vector2Int coord = m_EmptyCellsList[randomIndex]; // Get a random cell from the empty cells list
 
